@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #F1DDBF;
+    height: 100vh;
+    gap: 30px;
+}
+
+h1, h2 {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.title {
+    color: #525E75;
+}
+
+p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 300;
+    margin: 0 0 10px;
+    color: #000;
+}
+
+p span {
+    margin-bottom: 10px;
+}
+
+.data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #E8F6EF;
+    border-radius: 20px;
+    padding: 20px;
+    gap: 10px;
+    max-width: 300px;
+    width: 100%;
+}
+
+.card h2 {
+    color: #1B9C85;
+}
+
+.card span {
+    font-weight: 700;
+}
+
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 300;
+    font-size: 14px;
+    gap: 10px;
+}
+
+footer a {
+    color: #525E75;
+}
