@@ -1,7 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars');
 const routes = require('./routes/index');
-const path = require('node:path');
+const path = require('path');
 const port = process.env.PORT || 3000;
 const helpers = require('./helpers/helpers')
 
