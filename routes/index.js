@@ -2,7 +2,7 @@ const express = require('express');
 const {isHolidayToday, tomorrowIsHoliday, wasYesterdayHoliday, nextHoliday} = require("../helpers/holidays");
 const router = express.Router();
 
-router.get('/holidays', async (req, res) => {
+router.get('/', async (req, res) => {
 
     const today = await isHolidayToday();
     const tomorrow = await tomorrowIsHoliday();
