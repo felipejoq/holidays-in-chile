@@ -1,28 +1,28 @@
 const rootUrl = 'https://apis.digital.gob.cl/fl/feriados'
 const date = new Date();
-const axios = require('axios');
 
 const isHolidayToday = async () => {
     const source = `${rootUrl}/${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-    const {data} = await axios(source);
-    return data;
+    const response = await fetch(source);
+    return await response.json();
 }
 
 const wasYesterdayHoliday = async () => {
     const source = `${rootUrl}/${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate() - 1}`;
-    const {data} = await axios(source);
-    return data;
+    const response = await fetch(source);
+    return await response.json();
 }
 
 const tomorrowIsHoliday = async () => {
     const source = `${rootUrl}/${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate() + 1}`;
-    const {data} = await axios(source);
-    return data;
+    const response = await fetch(source);
+    return await response.json();
 }
 
 const nextHoliday = async () => {
     const source = `${rootUrl}/${date.getFullYear()}`;
-    const {data} = await axios(source);
+    const response = await fetch(source);
+    const data = await response.json();
     return data.find(holiday => Date.parse(holiday.fecha) > date);
 }
 
