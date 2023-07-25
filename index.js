@@ -3,7 +3,9 @@ const exphbs = require('express-handlebars');
 const routes = require('./routes/index');
 const path = require('path');
 const port = process.env.PORT || 3000;
-const helpers = require('./helpers/helpers')
+const helpers = require('./helpers/helpers');
+
+process.env.TZ = 'America/Santiago';
 
 const app = express();
 
@@ -24,5 +26,6 @@ app.set('views', path.join(__dirname + '/views'));
 app.use('/', routes);
 
 app.listen(port, () => {
-    console.log(`App listening on port http://localhost:${port}`)
+    console.log(`App listening on port http://localhost:${port}`);
+    console.log(process.env.TZ);
 })
