@@ -1,11 +1,11 @@
+process.env.TZ = 'America/Santiago';
 const express = require('express')
 const exphbs = require('express-handlebars');
 const routes = require('./routes/index');
 const path = require('path');
 const port = process.env.PORT || 3000;
-const helpers = require('./helpers/helpers');
 
-process.env.TZ = 'America/Santiago';
+const helpers = require('./helpers/helpers');
 
 const app = express();
 
