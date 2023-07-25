@@ -27,5 +27,5 @@ app.use('/', routes);
 
 app.listen(port, () => {
     console.log(`App listening on port http://localhost:${port}`);
-    console.log(process.env.TZ);
+    console.log(new Date().toString())
 })
