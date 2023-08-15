@@ -5,7 +5,7 @@ helper.toJSON = (context) => {
 };
 
 helper.isInalienable = (value) => {
-    return value === 0 ? 'Si' : 'No';
+    return Number(value) === 1 ? 'Si es irrenunciable' : 'No es irrenunciable';
 }
 
 helper.todayIs = () => {
