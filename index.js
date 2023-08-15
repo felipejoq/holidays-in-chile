@@ -4,14 +4,16 @@ const port = process.env.PORT || 3000;
 import express from 'express';
 import { create } from 'express-handlebars';
 import routes from './routes/index.js';
-import path, { join } from 'path';
-import { fileURLToPath } from 'url';
+import path, { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import helpers from './helpers/helpers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+app.disable('x-powered-by');
 
 app.use('/src', express.static(join(__dirname, 'public')));
 
