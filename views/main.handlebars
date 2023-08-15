@@ -1,14 +1,17 @@
 <!doctype html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>¿Es feriado?</title>
 
     <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Styles -->
     <link rel="stylesheet" href="./src/css/styles.css">
@@ -16,78 +19,81 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="./src/favicon.ico" type="image/x-icon">
 </head>
+
 <body>
-<h1 class="title">¿Es feriado en Chile?</h1>
-<div><i class="fa-regular fa-calendar"></i> {{ todayIs }}</div>
+    <h1 class="title">¿Es feriado en Chile?</h1>
+    <div><i class="fa-regular fa-calendar"></i> {{ todayIs }}</div>
 
-<div class="data">
-    <div class="card yesterday">
-        <h2>¿Ayer fue feriado?</h2>
-        {{#if yesterday.error}}
+    <div class="data">
+        <div class="card yesterday">
+            <h2>¿Ayer fue feriado?</h2>
+            {{#if yesterday.error}}
             <p>Ayer no fue feriado</p>
-        {{else}}
+            {{else}}
             {{#each yesterday}}
-                <p>Celebración: {{nombre}}</p>
-                <p>Fecha: {{fecha}}</p>
-                <p>Tipo: {{tipo}}</p>
-                <p>Irrenunciable: {{ isInalienable irrenunciable }}</p>
-                {{#if comentarios}}
-                    <p>Comentarios: {{ comentarios }}</p>
+                <p><span><i class="fa-solid fa-circle-question"></i> Celebración:</span> {{nombre}}</p>
+                <p><span><i class="fa-regular fa-calendar"></i> Fecha:</span> {{dateParse fecha}}</p>
+                <p><span><i class="fa-solid fa-clipboard-list"></i> Tipo:</span> {{tipo}}</p>
+                <p><span><i class="fa-solid fa-gavel"></i> Irrenunciable:</span> {{ isInalienable irrenunciable }}</p>
+                {{#if next.comentarios}}
+                    <p><span><i class="fa-solid fa-comments"></i> Comentarios:</span> {{ comentarios }}</p>
                 {{/if}}
             {{/each}}
-        {{/if}}
-    </div>
+            {{/if}}
+        </div>
 
-    <div class="card today">
-        <h2>¿Hoy es feriado?</h2>
-        {{#if today.error}}
+        <div class="card today">
+            <h2>¿Hoy es feriado?</h2>
+            {{#if today.error}}
             <p>Hoy no es feriado</p>
-        {{else}}
+            {{else}}
             {{#each today}}
-                <p>Celebración: {{nombre}}</p>
-                <p>Fecha: {{fecha}}</p>
-                <p>Tipo: {{tipo}}</p>
-                <p>Irrenunciable: {{ isInalienable irrenunciable }}</p>
-                {{#if comentarios}}
-                    <p>Comentarios: {{ comentarios }}</p>
+                <p><span><i class="fa-solid fa-circle-question"></i> Celebración:</span> {{nombre}}</p>
+                <p><span><i class="fa-regular fa-calendar"></i> Fecha:</span> {{dateParse fecha}}</p>
+                <p><span><i class="fa-solid fa-clipboard-list"></i> Tipo:</span> {{tipo}}</p>
+                <p><span><i class="fa-solid fa-gavel"></i> Irrenunciable:</span> {{ isInalienable irrenunciable }}</p>
+                {{#if next.comentarios}}
+                    <p><span><i class="fa-solid fa-comments"></i> Comentarios:</span> {{ comentarios }}</p>
                 {{/if}}
             {{/each}}
-        {{/if}}
-    </div>
+            {{/if}}
+        </div>
 
-    <div class="card tomorrow">
-        <h2>¿Mañana es feriado?</h2>
-        {{#if tomorrow.error}}
+        <div class="card tomorrow">
+            <h2>¿Mañana es feriado?</h2>
+            {{#if tomorrow.error}}
             <p>Mañana no es feriado</p>
-        {{else}}
+            {{else}}
             {{#each tomorrow}}
-                <p>Celebración: {{nombre}}</p>
-                <p>Fecha: {{fecha}}</p>
-                <p>Tipo: {{tipo}}</p>
-                <p>Irrenunciable: {{ isInalienable irrenunciable }}</p>
-                {{#if comentarios}}
-                    <p>Comentarios: {{ comentarios }}</p>
+                <p><span><i class="fa-solid fa-circle-question"></i> Celebración:</span> {{nombre}}</p>
+                <p><span><i class="fa-regular fa-calendar"></i> Fecha:</span> {{dateParse fecha}}</p>
+                <p><span><i class="fa-solid fa-clipboard-list"></i> Tipo:</span> {{tipo}}</p>
+                <p><span><i class="fa-solid fa-gavel"></i> Irrenunciable:</span> {{ isInalienable irrenunciable }}</p>
+                {{#if next.comentarios}}
+                    <p><span><i class="fa-solid fa-comments"></i> Comentarios:</span> {{ comentarios }}</p>
                 {{/if}}
             {{/each}}
+            {{/if}}
+        </div>
+    </div>
+    <div class="card next">
+        <h2>Próximo Feriado</h2>
+        {{#if next}}
+            <p><span><i class="fa-solid fa-circle-question"></i> Celebración:</span> {{next.nombre}}</p>
+            <p><span><i class="fa-regular fa-calendar"></i> Fecha:</span> {{dateParse next.fecha}}</p>
+            <p><span><i class="fa-solid fa-clipboard-list"></i> Tipo:</span> {{next.tipo}}</p>
+            <p><span><i class="fa-solid fa-gavel"></i> Irrenunciable:</span> {{ isInalienable next.irrenunciable }}</p>
+            {{#if next.comentarios}}
+                <p><span><i class="fa-solid fa-comments"></i> Comentarios:</span> {{ next.comentarios }}</p>
+            {{/if}}
         {{/if}}
     </div>
-</div>
-<div class="card next">
-    <h2>Próximo Feriado</h2>
-{{#if next}}
-    <p><span><i class="fa-solid fa-circle-question"></i> Celebración:</span> {{next.nombre}}</p>
-    <p><span><i class="fa-regular fa-calendar"></i> Fecha:</span> {{next.fecha}}</p>
-    <p><span><i class="fa-solid fa-clipboard-list"></i> Tipo:</span> {{next.tipo}}</p>
-    <p><span><i class="fa-solid fa-gavel"></i> Irrenunciable:</span> {{ isInalienable next.irrenunciable }}</p>
-    {{#if next.comentarios}}
-        <p><span><i class="fa-solid fa-comments"></i> Comentarios:</span> {{ next.comentarios }}</p>
-    {{/if}}
-{{/if}}
-</div>
 
-<footer>
-    <div>Data get from <a href="https://apis.digital.gob.cl/fl" target="_blank">Here</a> - <a href="https://github.com/felipejoq/holidays-in-chile" target="_blank">Repository</a></div>
-</footer>
+    <footer>
+        <div>Data get from <a href="https://apis.digital.gob.cl/fl" target="_blank">Here</a> - <a
+                href="https://github.com/felipejoq/holidays-in-chile" target="_blank">Repository</a></div>
+    </footer>
 
 </body>
+
 </html>

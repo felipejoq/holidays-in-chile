@@ -44,7 +44,7 @@ p span {
 .data {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     gap: 30px;
     width: 100%;
     padding: 20px;
