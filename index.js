@@ -1,31 +1,38 @@
 process.env.TZ = 'America/Santiago';
-const express = require('express')
-const exphbs = require('express-handlebars');
-const routes = require('./routes/index');
-const path = require('path');
 const port = process.env.PORT || 3000;
 
-const helpers = require('./helpers/helpers');
+import express from 'express';
+import { create } from 'express-handlebars';
+import routes from './routes/index.js';
+import path, { join } from 'path';
+import { fileURLToPath } from 'url';
+import helpers from './helpers/helpers.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
-app.use('/src', express.static(path.join(__dirname, 'public')))
+app.use('/src', express.static(join(__dirname, 'public')));
 
-const hbs = exphbs.create({
+const hbs = create({
     defaultLayout: 'main',
-    layoutsDir: path.join(__dirname, 'views'),
-    partialsDir: path.join(__dirname, 'views/partials'),
+    layoutsDir: join(__dirname, 'views'),
+    partialsDir: join(__dirname, 'views/partials'),
     helpers
 });
 
 app.engine('handlebars', hbs.engine);
 
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname + '/views'));
+app.set('views', join(__dirname + '/views'));
 
 app.use('/', routes);
+
+console.log(__filename);
+console.log(__dirname);
 
 app.listen(port, () => {
     console.log(`App listening on port http://localhost:${port}`);
     console.log(new Date().toString())
-})
+});

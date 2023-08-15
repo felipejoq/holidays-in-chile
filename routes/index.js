@@ -1,6 +1,6 @@
-const express = require('express');
-const {isHolidayToday, tomorrowIsHoliday, wasYesterdayHoliday, nextHoliday} = require("../helpers/holidays");
-const router = express.Router();
+import { Router } from 'express';
+import { isHolidayToday, tomorrowIsHoliday, wasYesterdayHoliday, nextHoliday } from "../helpers/holidays.js";
+const router = Router();
 
 router.get('/', async (req, res) => {
 
@@ -12,4 +12,4 @@ router.get('/', async (req, res) => {
     res.render('main', {today, tomorrow, yesterday, next});
 });
 
-module.exports = router;
+export default router;

@@ -34,4 +34,4 @@ helper.dateParse = (dateString) => {
         });
 }
 
-module.exports = helper;
+export default helper;
