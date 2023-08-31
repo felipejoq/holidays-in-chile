@@ -5,7 +5,8 @@ Para obtener datos de [este servicio](https://apis.digital.gob.cl/fl) donde
 se exponen los días feriados de Chile.
 
 👉 Live demo [AQUÍ](https://holidays-in-chile.onrender.com/) 🗓️
-(demora en la carga porque está alojado en un servicio gratuito que hace dormir la app cuando no se usa)
+
+(demora en la primera carga porque está alojado en un servicio gratuito que hace "dormir" la App cuando no se usa)
 
 El proyecto muestra si ayer, hoy o mañana es feriado y también muestra el
 próximo feriado que se aproxima en el calendario.
