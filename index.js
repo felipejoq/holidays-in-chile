@@ -31,8 +31,8 @@ app.set('views', join(__dirname + '/views'));
 
 app.use('/', routes);
 
-console.log(__filename);
-console.log(__dirname);
+// console.log(__filename);
+// console.log(__dirname);
 
 app.listen(port, () => {
     console.log(`App listening on port http://localhost:${port}`);
