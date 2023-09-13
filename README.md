@@ -13,12 +13,13 @@ próximo feriado que se aproxima en el calendario.
 
 ```
 Changelog: 13 de Septiembre, 2023.
-```
+
 - Se hace fetch solo una vez al día para obtener los datos optimizando así el tiempo de respuesta.
 - Se separó en servicios (data), controllers (rutas), vistas (HTML con Handlebars) intentando una arquitectura mvc.
 - Se organizó la estructura de carpetas.
 - En la carpeta data se crea el archivo holidays.json el que contiene la información de los feriados.
 - Se modificaron estilos CSS para lograr un diseño más minimalista y ordenado.
+```
 
 ### Vista previa:
 Aquí una vista previa de cómo se ve al desplegar el proyecto.
