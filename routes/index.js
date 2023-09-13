@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { isHolidayToday, tomorrowIsHoliday, wasYesterdayHoliday, nextHoliday } from "../helpers/holidays.js";
+import {tomorrowIsHoliday, todayIsHoliday, wasYesterdayHoliday, nextHoliday} from "../services/holidays.service.js";
 const router = Router();
 
 router.get('/', async (req, res) => {
 
-    const today = await isHolidayToday();
+    const today = await todayIsHoliday();
     const tomorrow = await tomorrowIsHoliday();
     const yesterday = await wasYesterdayHoliday();
     const next = await nextHoliday();

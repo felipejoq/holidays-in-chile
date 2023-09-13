@@ -1,12 +1,15 @@
+import jobGeneratingData from "./config/task.js";
+
 process.env.TZ = 'America/Santiago';
 const port = process.env.PORT || 3000;
 
 import express from 'express';
-import { create } from 'express-handlebars';
+import {create} from 'express-handlebars';
 import routes from './routes/index.js';
-import path, { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import path, {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import helpers from './helpers/helpers.js';
+import {getDataHolidays} from "./services/data.service.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,10 +34,9 @@ app.set('views', join(__dirname + '/views'));
 
 app.use('/', routes);
 
-// console.log(__filename);
-// console.log(__dirname);
-
-app.listen(port, () => {
+app.listen(port, async () => {
     console.log(`App listening on port http://localhost:${port}`);
+    await getDataHolidays();
+    await jobGeneratingData();
     console.log(new Date().toString())
 });
