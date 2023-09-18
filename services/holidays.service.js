@@ -3,13 +3,15 @@ import {getDataHolidays} from "./data.service.js";
 
 export const todayIsHoliday = async () => {
     const holidays = await getDataHolidays();
-    const dateToday = new Date(DATE_TODAY).getUTCDate();
+    const dateToday = new Date(DATE_TODAY);
 
     const holidaysFind = holidays.filter(holiday => {
 
-        const dateHoliday = new Date(holiday["fecha"]).getUTCDate();
+        const dateHoliday = new Date(holiday["fecha"]);
 
-        if (dateToday === dateHoliday) {
+        if (dateHoliday.getUTCDate() === dateToday.getDate()
+            && dateHoliday.getUTCMonth() === dateToday.getUTCMonth()
+            && dateHoliday.getUTCFullYear() === dateToday.getUTCFullYear()) {
             return holiday;
         }
     });
@@ -24,12 +26,13 @@ export const todayIsHoliday = async () => {
 export const tomorrowIsHoliday = async () => {
     const tomorrow = new Date(DATE_TODAY)
     tomorrow.setDate(tomorrow.getDate() + 1);
-    const dateTomorrow = tomorrow.getUTCDate();
 
     const holidays = await getDataHolidays();
     const holiday = holidays.filter(holiday => {
-        const dateHoliday = new Date(holiday["fecha"]).getUTCDate();
-        if (dateHoliday === dateTomorrow) {
+        const dateHoliday = new Date(holiday["fecha"]);
+        if (dateHoliday.getUTCDate() === tomorrow.getDate()
+            && dateHoliday.getUTCMonth() === tomorrow.getUTCMonth()
+            && dateHoliday.getUTCFullYear() === tomorrow.getUTCFullYear()) {
             return holiday;
         }
     });
@@ -44,13 +47,14 @@ export const tomorrowIsHoliday = async () => {
 export const wasYesterdayHoliday = async () => {
     let yesterday = new Date(DATE_TODAY)
     yesterday.setDate(yesterday.getDate() - 1);
-    const dateYesterday = yesterday.getUTCDate();
 
     const holidays = await getDataHolidays();
     const holiday = holidays.filter(holiday => {
-        const dateHoliday = new Date(holiday["fecha"]).getUTCDate();
+        const dateHoliday = new Date(holiday["fecha"]);
 
-        if (dateHoliday === dateYesterday) {
+        if (dateHoliday.getUTCDate() === yesterday.getDate()
+            && dateHoliday.getUTCMonth() === yesterday.getUTCMonth()
+            && dateHoliday.getUTCFullYear() === yesterday.getUTCFullYear()) {
             return holiday;
         }
     });
@@ -69,7 +73,6 @@ export const nextHoliday = async () => {
     const holiday = holidays.find(holiday => {
 
         if (new Date(holiday["fecha"]) > DATE_TODAY) {
-            console.log(holiday)
             return holiday;
         }
     });
