@@ -1,19 +1,21 @@
-import {DATE_TODAY, NO_HOLIDAY, ROOT_URL_SERVICE} from "../config/utils.js";
+import {DATE_TODAY, NO_HOLIDAY} from "../config/utils.js";
 import {getDataHolidays} from "./data.service.js";
 
 export const todayIsHoliday = async () => {
     const holidays = await getDataHolidays();
+    const dateToday = new Date(DATE_TODAY).getUTCDate();
 
-    const holiday = holidays.find(holiday => {
-        const dateHoliday = new Date(holiday["fecha"]).toLocaleDateString('es-CL');
-        const dateToday = DATE_TODAY.toLocaleDateString('es-CL');
-        if (dateHoliday === dateToday) {
+    const holidaysFind = holidays.filter(holiday => {
+
+        const dateHoliday = new Date(holiday["fecha"]).getUTCDate();
+
+        if (dateToday === dateHoliday) {
             return holiday;
         }
     });
 
-    if (holiday) {
-        return holiday;
+    if (holidaysFind.length > 0) {
+        return holidaysFind;
     } else {
         return NO_HOLIDAY;
     }
@@ -22,17 +24,17 @@ export const todayIsHoliday = async () => {
 export const tomorrowIsHoliday = async () => {
     const tomorrow = new Date(DATE_TODAY)
     tomorrow.setDate(tomorrow.getDate() + 1);
+    const dateTomorrow = tomorrow.getUTCDate();
 
     const holidays = await getDataHolidays();
-    const holiday = holidays.find(holiday => {
-        const dateHoliday = new Date(holiday["fecha"]).toLocaleDateString('es-CL');
-        const dateTomorrow = tomorrow.toLocaleDateString('es-CL');
+    const holiday = holidays.filter(holiday => {
+        const dateHoliday = new Date(holiday["fecha"]).getUTCDate();
         if (dateHoliday === dateTomorrow) {
             return holiday;
         }
     });
 
-    if (holiday) {
+    if (holiday.length > 0) {
         return holiday;
     } else {
         return NO_HOLIDAY;
@@ -42,17 +44,18 @@ export const tomorrowIsHoliday = async () => {
 export const wasYesterdayHoliday = async () => {
     let yesterday = new Date(DATE_TODAY)
     yesterday.setDate(yesterday.getDate() - 1);
+    const dateYesterday = yesterday.getUTCDate();
 
     const holidays = await getDataHolidays();
-    const holiday = holidays.find(holiday => {
-        const dateHoliday = new Date(holiday["fecha"]).toLocaleDateString('es-CL');
-        const dateYesterday = yesterday.toLocaleDateString('es-CL');
+    const holiday = holidays.filter(holiday => {
+        const dateHoliday = new Date(holiday["fecha"]).getUTCDate();
+
         if (dateHoliday === dateYesterday) {
             return holiday;
         }
     });
 
-    if (holiday) {
+    if (holiday.length > 0) {
         return holiday;
     } else {
         return NO_HOLIDAY;
@@ -62,7 +65,14 @@ export const wasYesterdayHoliday = async () => {
 export const nextHoliday = async () => {
     const holidays = await getDataHolidays();
 
-    const holiday = holidays.find(holiday => Date.parse(holiday["fecha"]) > DATE_TODAY);
+
+    const holiday = holidays.find(holiday => {
+
+        if (new Date(holiday["fecha"]) > DATE_TODAY) {
+            console.log(holiday)
+            return holiday;
+        }
+    });
 
     if (holiday) {
         return holiday;

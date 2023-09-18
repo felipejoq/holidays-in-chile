@@ -20,18 +20,23 @@ helper.todayIs = () => {
 }
 
 helper.dateParse = (dateString) => {
+    const dateUTC = new Date(Date.parse(dateString));
+    const opcionesFecha = {
+        timeZone: 'America/Santiago',
+        weekday: 'long',
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+    };
 
-    let dateSplit = dateString.split('-').map(value => Number(value))
-    let date = new Date(Date.UTC(dateSplit[0], dateSplit[1] - 1, dateSplit[2] + 1))
+    // Ajustar la fecha y hora para obtener la fecha en la zona horaria correcta
+    dateUTC.setMinutes(dateUTC.getMinutes() + dateUTC.getTimezoneOffset());
 
-    return date.toLocaleDateString("es-CL",
-        {
-            weekday: "long",
-            day: "2-digit",
-            month: "long",
-            year: "numeric",
-            timeZone: 'America/Santiago'
-        });
+    return dateUTC.toLocaleDateString("es-CL", opcionesFecha);
+}
+
+helper.toString = (obj) => {
+    return JSON.stringify(obj);
 }
 
 export default helper;

@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import {ROOT_URL_SERVICE} from "../config/utils.js";
+import {DATE_TODAY, ROOT_URL_SERVICE} from "../config/utils.js";
 
 export const getDataHolidays = async () => {
 
@@ -22,9 +22,9 @@ export const getDataHolidays = async () => {
 }
 
 const getAllHolidays = async () => {
-    const source = `${ROOT_URL_SERVICE}`;
+    const source = `${ROOT_URL_SERVICE}/${DATE_TODAY.getFullYear()}`;
     const response = await fetch(source);
-    if (!response) {
+    if (!response.ok) {
         throw new Error('Hubo un error al obtener los datos del servicio.')
     }
     return await response.json();
@@ -32,7 +32,10 @@ const getAllHolidays = async () => {
 
 export const saveAllHolidays = async () => {
     try {
-        const allHolidays = await getAllHolidays();
+        const allHolidays = (await getAllHolidays()).map(holiday => {
+            holiday["fecha"] = new Date(holiday["fecha"]);
+            return holiday;
+        });
         fs.writeFileSync('./data/holidays.json', JSON.stringify(allHolidays));
         console.log('El archivo holiday.json se ha creado correctamente.');
     } catch (error) {
