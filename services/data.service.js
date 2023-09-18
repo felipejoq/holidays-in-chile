@@ -1,7 +1,7 @@
-import fs from "node:fs";
-import {DATE_TODAY, ROOT_URL_SERVICE} from "../config/utils.js";
+const fs = require("node:fs");
+const {DATE_TODAY, ROOT_URL_SERVICE} = require("../config/utils.js")
 
-export const getDataHolidays = async () => {
+const getDataHolidays = async () => {
 
     try {
         const existFile = fs.existsSync('./data/holidays.json');
@@ -30,7 +30,7 @@ const getAllHolidays = async () => {
     return await response.json();
 }
 
-export const saveAllHolidays = async () => {
+const saveAllHolidays = async () => {
     try {
         const allHolidays = (await getAllHolidays()).map(holiday => {
             holiday["fecha"] = new Date(holiday["fecha"]);
@@ -41,4 +41,9 @@ export const saveAllHolidays = async () => {
     } catch (error) {
         console.error('Error al escribir el archivo con los feriados', error);
     }
+}
+
+module.exports = {
+    getDataHolidays,
+    saveAllHolidays
 }

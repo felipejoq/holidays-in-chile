@@ -1,18 +1,17 @@
-import jobGeneratingData from "./config/task.js";
+const jobGeneratingData = require("./config/task.js");
 
 process.env.TZ = 'America/Santiago';
 const port = process.env.PORT || 3000;
 
-import express from 'express';
-import {create} from 'express-handlebars';
-import routes from './routes/index.js';
-import path, {join} from 'node:path';
-import {fileURLToPath} from 'node:url';
-import helpers from './helpers/helpers.js';
-import {getDataHolidays} from "./services/data.service.js";
+const express = require('express');
+const {create}  = require('express-handlebars');
+const routes  =  require('./routes/index.js');
+const {join} =  require('node:path');
+const {fileURLToPath}  =  require('node:url');
+const helpers  =  require('./helpers/helpers.js');
+const {getDataHolidays}  =  require("./services/data.service.js");
+const {dirname} = require("path");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 

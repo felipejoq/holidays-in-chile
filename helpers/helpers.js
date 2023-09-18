@@ -39,4 +39,4 @@ helper.toString = (obj) => {
     return JSON.stringify(obj);
 }
 
-export default helper;
+module.exports = helper;

@@ -1,7 +1,7 @@
-import {DATE_TODAY, NO_HOLIDAY} from "../config/utils.js";
-import {getDataHolidays} from "./data.service.js";
+const {DATE_TODAY, NO_HOLIDAY} = require("../config/utils.js");
+const {getDataHolidays} = require("./data.service.js");
 
-export const todayIsHoliday = async () => {
+const todayIsHoliday = async () => {
     const holidays = await getDataHolidays();
     const dateToday = new Date(DATE_TODAY);
 
@@ -23,7 +23,7 @@ export const todayIsHoliday = async () => {
     }
 }
 
-export const tomorrowIsHoliday = async () => {
+const tomorrowIsHoliday = async () => {
     const tomorrow = new Date(DATE_TODAY)
     tomorrow.setDate(tomorrow.getDate() + 1);
 
@@ -44,7 +44,7 @@ export const tomorrowIsHoliday = async () => {
     }
 }
 
-export const wasYesterdayHoliday = async () => {
+const wasYesterdayHoliday = async () => {
     let yesterday = new Date(DATE_TODAY)
     yesterday.setDate(yesterday.getDate() - 1);
 
@@ -66,7 +66,7 @@ export const wasYesterdayHoliday = async () => {
     }
 }
 
-export const nextHoliday = async () => {
+const nextHoliday = async () => {
     const holidays = await getDataHolidays();
 
 
@@ -82,4 +82,11 @@ export const nextHoliday = async () => {
     } else {
         return NO_HOLIDAY;
     }
+}
+
+module.exports = {
+    todayIsHoliday,
+    tomorrowIsHoliday,
+    wasYesterdayHoliday,
+    nextHoliday
 }

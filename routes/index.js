@@ -1,8 +1,13 @@
-import { Router } from 'express';
-import {tomorrowIsHoliday, todayIsHoliday, wasYesterdayHoliday, nextHoliday} from "../services/holidays.service.js";
+const {Router} = require('express');
+const {
+    tomorrowIsHoliday,
+    todayIsHoliday,
+    wasYesterdayHoliday,
+    nextHoliday
+} = require("../services/holidays.service.js");
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/holidays', async (req, res) => {
 
     const today = await todayIsHoliday();
     const tomorrow = await tomorrowIsHoliday();
@@ -12,4 +17,4 @@ router.get('/', async (req, res) => {
     res.render('main', {today, tomorrow, yesterday, next});
 });
 
-export default router;
+module.exports = router;
